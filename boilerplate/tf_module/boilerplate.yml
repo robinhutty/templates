@@ -1,0 +1,101 @@
+---
+required_version: ">= 0.6.0"  # required version of boilerplate tool, _not_ TF
+variables:
+  - name: ModuleName
+    description: "The name of the new module"
+    type: string
+
+  - name: Providers
+    description: "A list of Providers."
+    type: list
+    default:
+      - name: "aws"
+        source: "hashicorp/aws"
+        version: ">= 5.100.0, < 6"
+      - name: "null"
+        source: "hashicorp/null"
+        version: "~> 3.0"
+
+  - name: Authors
+    description: "A list of authors, with display name, email, forge-id"
+    type: list
+    default:
+      - display_name: "Robin Hutty"
+        email: "robin@allgoodbits.org"
+        forge-id: "robinhutty" # this is the username at the primary vcs forge (forgejo, github, etc.) and is used for CODEOWNERS
+
+  - name: CopyrightInfo
+    description: "Copyright information to put in the README. 'Typically Copyright <year> <person|company>.'"
+    type: string
+    default: "Copyright (C) 2026 Duncan (Robin) Hutty"
+
+  - name: License
+    description: "A list providing the SPDX License identifier and a stable URL for the text of the license"
+    type: map
+    default:
+      spdxid: "AGPL-3.0-only"
+      spdxurl: "https://spdx.org/licenses/AGPL-3.0-only.html"
+
+  - name: Forge
+    description: "The base location for the source code for this Project."
+    type: map
+    default:
+      hostname: "github.com"
+      org: "robinhutty"
+      project: "tf_modules"
+
+  - name: ModuleSource
+    description: "The canonical location for the source code for the new Terraform module."
+    type: string
+    default: "https://{{ .Forge.hostname }}/{{ .Forge.org }}/{{ .Forge.project }}/modules/{{ .ModuleName | kebabcase }}"
+
+  - name: TfVersion
+    description: The version of OpenTofu/Terraform to use
+    type: string
+    default: ">= 1.6"
+
+  - name: HCLCommand
+    description: "Whether to use OpenTofu or Terraform."
+    type: string
+    default: "tofu"
+
+  - name: Terratest
+    description: "Generate for Terratest?"
+    type: bool
+    default: false
+
+skip_files:
+  - path: test
+    if: "{{ .Terratest }}"
+
+hooks:
+  after:
+    # TODO: pre-commit, terraform-docs?
+
+    # Format the code
+    - command: "{{ .HCLCommand }}"
+      args:
+        - fmt
+      dir: "{{ outputFolder }}"
+
+# # For Terratest
+#     - command: go
+#       args:
+#         - mod
+#         - init
+#         - "{{ .ModuleSource }}"
+#       dir: "{{ outputFolder }}/test"
+#       skip: "{{ not .Terratest }}"
+#     - command: go
+#       args:
+#         - mod
+#         - tidy
+#       dir: "{{ outputFolder }}/test"
+#       skip: "{{ not .Terratest }}"
+#     - command: go
+#       args:
+#         - test
+#         - "-v"
+#       dir: "{{ outputFolder }}/test"
+#       skip: "{{ not .Terratest }}"
+# # End Terratest

@@ -1,0 +1,4 @@
+{{ if .CopyrightInfo -}}
+{{ .CopyrightInfo }}
+{{ end -}}
+This work is licensed {{ .License.spdxid }}, the text of which can be found at {{ .License.spdxurl }}

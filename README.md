@@ -1,6 +1,6 @@
 ---
 date: 2026-02-13
-modified: 2026-02-13T18:19:05
+modified: 2026-03-07T14:56:40
 author: Robin Hutty
 ---
 
@@ -12,7 +12,7 @@ This repository is a collection of templates that I use to help establish consis
 * [`helm`](./helm): writing a new Chart? Start here
 * [`lima`](./lima): templates for provisioning Virtual Machines with [lima][6]
 * [`markdown`](./markdown) is the most common markup language for prose in my world
-* [`shell`](./shell) is one the most common scripting languages
+* [`shell`](./shell) scripts are some the most common. [Some tips][8]
 
 The choices that these templates are sometimes controversial and while I do not feel the need to justify them in my personal world, I have written [some articles][7] to help explain my preferences, decisions, and situations when they might/might not make sense.
 
@@ -23,3 +23,4 @@ The choices that these templates are sometimes controversial and while I do not 
 [5]: https://asciidoc.org/
 [6]: https://lima-vm.io
 [7]: https://robin.hutty.us/articles/
+[8]: https://robin.hutty.us/articles/tips-shell/
