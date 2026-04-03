@@ -1,0 +1,34 @@
+$ORIGIN example.com.
+$TTL 86400 ; default time-to-live for this zone
+; Annotated with some comments, but see https://nsd.docs.nlnetlabs.nl/en/latest/zonefile.html
+; NOTE: @ is substituted throughout with the value in $ORIGIN
+
+@   IN  SOA     ns.example.com. noc.dns.example.org. (
+        2020080302  ;Serial
+        7200        ;Refresh
+        3600        ;Retry
+        1209600     ;Expire
+        3600        ;Negative response caching TTL
+)
+
+
+; The nameservers that are authoritative for this zone.
+@                       NS        example.com.
+
+; A and AAAA records are for IPv4 and IPv6 addresses respectively
+@                       A         192.0.2.1
+@                       AAAA      2001:db8::3
+
+; CNAME record redirects from www.example.com to example.com
+www                     CNAME     example.com.
+; MX records specify Mail eXchangers
+mail                    MX        10 example.com.
+
+; Extras:
+; TXT records for mail (DKIM, SPF, DMARC)
+;@                       TXT       "v=spf1 a:smtp.example.com ip4:192.0.2.1 ip6:2001:db8::3 -all"
+;_domainkey              TXT       "t=n;o=-"
+;mail._domainkey         TXT       "v=DKIM1;..."
+
+; SRV records
+; SSHFP records
