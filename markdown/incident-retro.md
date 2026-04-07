@@ -1,7 +1,7 @@
 ---
 title: "Incident Retrospective: ChangeMe"
 date:
-modified: 2026-04-03T13:47:24
+modified: 2026-04-07T18:16:33
 ---
 
 NOTE: some of these sections will likely not be required/relevant to any particular incident. Remember that this template is a guide to assist; it is not intended as rigidly prescriptive.
@@ -37,7 +37,6 @@ Include just enough detail about the scope so that the reader can determine whet
 
 * What can we learn about the system(s)/software/processes? Consider using contributing factors and/or "N whys".
 * Note previous similar incidents.
-
 
 ## Corrective Actions
 
