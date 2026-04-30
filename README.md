@@ -1,6 +1,6 @@
 ---
 date: 2026-02-13
-modified: 2026-04-03T13:16:55
+modified: 2026-04-10T18:05:33
 author: Robin Hutty
 ---
 
@@ -13,8 +13,9 @@ This repository is a collection of templates that I use to help establish consis
 * [`lima`](./lima): templates for provisioning Virtual Machines with [lima][6]
 * [`markdown`](./markdown) is the most common markup language for prose in my world
 * [`shell`](./shell) scripts are some of the most common. [Some tips][8]
+* I also like [The Good Docs Project templates][9] .
 
-The choices that these templates are sometimes controversial and while I do not feel the need to justify them in my personal world, I have written [some articles][7] to help explain my preferences, decisions, and situations when they might/might not make sense.
+(The choices in these templates might be considered controversial or unsuitable for certain projects/organizations - YMMV and use what works for you.) I have written [some articles][7] to help explain my preferences, decisions, and situations when they might/might not make sense.
 
 [1]: https://robin.hutty.us/articles/01-guidelines#cognitive-burden
 [2]: https://github.com/gruntwork-io/boilerplate
@@ -24,3 +25,4 @@ The choices that these templates are sometimes controversial and while I do not 
 [6]: https://lima-vm.io
 [7]: https://robin.hutty.us/articles/
 [8]: https://robin.hutty.us/articles/tips-shell/
+[9]: https://gitlab.com/tgdp/templates
