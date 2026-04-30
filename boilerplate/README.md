@@ -1,6 +1,6 @@
 ---
 date: 2026-02-13
-modified: 2026-02-13T18:14:16
+modified: 2026-04-29T21:39:03
 params:
   author: Robin Hutty
 ---
@@ -39,7 +39,7 @@ The basic command, which can be run from the root of this repository, is:
 export FORGE=github.com  # or gitlab.com or forgejo
 boilerplate --template-url ./templates/boilerplate/vcs_repo \
   --output-folder <path to repos dir>/<new-repo-name> \
-  --non-interactive --var RepoName=<new-repo-name> --var ForgeName=${FORGE}
+  --non-interactive --var Name=<new-repo-name> --var "Forge.hostname=${FORGE}"
 ```
 
 ### What does that command actually do?
