@@ -1,0 +1,87 @@
+---
+required_version: ">= 0.13.0"  # required version of boilerplate tool, _not_ TF
+variables:
+  - name: Name
+  - name: Project
+    description: "Metadata for this VCS project"
+    type: map
+    default:
+      id: "{{ .Name }}"
+      description: "{{ .Name }}"
+
+  - name: Authors
+    description: "A list of authors, with display name, email, forge-id"
+    type: list
+    confirm: true
+    default:
+      - display_name: "Robin Hutty"
+        email: "robin@allgoodbits.org"
+        forge-id: "robinhutty" # this is the username at the primary vcs forge (forgejo, github, etc.) and is used for CODEOWNERS
+
+  - name: CopyrightInfo
+    description: "Copyright information to put in the README. 'Typically Copyright <year> <person|company>.'"
+    type: string
+    confirm: true
+    default: "Copyright (C) 2026 Duncan (Robin) Hutty"
+
+  - name: License
+    description: "A list providing the SPDX License identifier and a stable URL for the text of the license"
+    type: map
+    confirm: true
+    default:
+      spdxid: "BSD-3-Clause"
+      spdxurl: "https://spdx.org/licenses/BSD-3-Clause.html"
+
+  - name: Forge
+    description: "The base location for the source code for this Project."
+    type: map
+    confirm: true
+    default:
+      name: GitHub
+      hostname: "github.com"
+      org: "robinhutty"
+
+  - name: Source
+    description: "The canonical location for the source code."
+    type: string
+    default: "https://{{ .Forge.hostname }}/{{ .Forge.org }}/{{ .Project.id }}"
+
+  - name: HCLCommand
+    description: "Whether to use OpenTofu or Terraform."
+    type: string
+    default: "tofu"
+
+# skip_files:
+#   - path: test
+#     if: "{{ .Terratest }}"
+
+hooks:
+  after:
+    # Initialize the repository
+    - command: git
+      args:
+        - init
+      dir: "{{ outputFolder }}"
+    # stage files for commit
+    - command: git
+      args:
+        - add
+        - "*md"
+        - LICENSE
+        - .gitignore
+        - .gitattributes
+        - .editorconfig
+        - CODEOWNERS
+      dir: "{{ outputFolder }}"
+    - command: git
+      args:
+        - commit
+        - -am"initial commit"
+    - command: git
+      args:
+        - branch
+        - -M
+        - main
+    - command: echo
+      args:
+        - "You can push with \n 'git remote add origin git@{{ .Forge.hostname }}:{{ .Forge.org }}/{{ .Project.id }}.git && git push -u origin main'"
