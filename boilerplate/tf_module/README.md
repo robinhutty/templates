@@ -46,7 +46,7 @@ The [`test` directory](./test) contains [Terratest](https://terratest.gruntwork.
 
 {{ .CopyrightInfo }}
 
-This work is licensed {{ .License.spdxid }}, the text of which can be found at {{ .License.spdxurl }}
+This work uses the {{ .License.spdxid }} license, the text of which can be found at {{ .License.spdxurl }}
 
 ---
 

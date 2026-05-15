@@ -32,9 +32,10 @@ variables:
   - name: License
     description: "A list providing the SPDX License identifier and a stable URL for the text of the license"
     type: map
+    confirm: true
     default:
-      spdxid: "AGPL-3.0-only"
-      spdxurl: "https://spdx.org/licenses/AGPL-3.0-only.html"
+      spdxid: "BSD-3-Clause"
+      spdxurl: "https://spdx.org/licenses/BSD-3-Clause.html"
 
   - name: Forge
     description: "The base location for the source code for this Project."
@@ -42,7 +43,7 @@ variables:
     default:
       hostname: "github.com"
       org: "robinhutty"
-      project: "tf_modules"
+      project: "tf-modules"
 
   - name: ModuleSource
     description: "The canonical location for the source code for the new Terraform module."
@@ -60,13 +61,13 @@ variables:
     default: "tofu"
 
   - name: Terratest
-    description: "Generate for Terratest?"
+    description: "Generate Terratest?"
     type: bool
     default: false
 
 skip_files:
-  - path: test
-    if: "{{ .Terratest }}"
+  - path: test/*/*
+    if: "{{ not .Terratest }}"
 
 hooks:
   after:
@@ -76,6 +77,14 @@ hooks:
     - command: "{{ .HCLCommand }}"
       args:
         - fmt
+      dir: "{{ outputFolder }}"
+
+    # Linting
+    - command: tflint
+      args:
+        - --init
+      dir: "{{ outputFolder }}"
+    - command: tflint
       dir: "{{ outputFolder }}"
 
 # # For Terratest

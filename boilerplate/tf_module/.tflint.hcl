@@ -1,5 +1,5 @@
-
 tflint {
+  # https://github.com/terraform-linters/tflint
   required_version = ">= 0.61.0"
 }
 
@@ -9,7 +9,7 @@ config {
 
   call_module_type = "local"  # [all|local|none]
   force = true  # if true, return zero exit status even if issues found
-  minimum_failure_severity = "error" # [error|warning|notice], sets minimum severity level for exiting with a non-zero error code
+  # minimum_failure_severity = "error" # [error|warning|notice], sets minimum severity level for exiting with a non-zero error code
 
   # disabled_by_default = false
 
@@ -19,8 +19,8 @@ config {
   #   "terraform-aws-modules/security-group/aws" = true
   # }
 
-  varfile = ["example1.tfvars", "example2.tfvars"]
-  variables = ["foo=bar", "bar=[\"baz\"]"]
+  # varfile = ["example1.tfvars", "example2.tfvars"]
+  # variables = ["foo=bar", "bar=[\"baz\"]"]
 }
 
 plugin "terraform" {
@@ -33,7 +33,7 @@ plugin "terraform" {
 plugin "aws" {
 	# https://github.com/terraform-linters/tflint-ruleset-aws
   enabled = true
-  version = "0.46.0"
+  version = "0.47.0"
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
 
 	# Deep checking uses your provider's credentials to apply additional checks that require read access to a target AWS account. TFLint will read AWS configuration from a provider "aws" {} block or the same environment variables used by the AWS provider. See https://github.com/terraform-linters/tflint-ruleset-aws/blob/master/docs/deep_checking.md before enabling.
